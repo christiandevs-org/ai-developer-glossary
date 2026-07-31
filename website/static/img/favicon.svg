@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+	<style>
+		.s { stroke: #0f151d; }
+		.f { fill: #0f151d; }
+		@media (prefers-color-scheme: dark) {
+			.s { stroke: #dfe7f2; }
+			.f { fill: #dfe7f2; }
+		}
+	</style>
+	<circle class="s" cx="50" cy="50" r="46" stroke-width="2" opacity="0.4" />
+	<g class="s" stroke-width="9" stroke-linecap="round">
+		<line x1="50" y1="10" x2="50" y2="90" />
+		<line x1="10" y1="50" x2="90" y2="50" />
+	</g>
+	<g class="f">
+		<circle cx="50" cy="10" r="5" />
+		<circle cx="50" cy="90" r="5" />
+		<circle cx="10" cy="50" r="5" />
+		<circle cx="90" cy="50" r="5" />
+	</g>
+	<rect class="f" x="35" y="35" width="30" height="30" rx="4" />
+</svg>
