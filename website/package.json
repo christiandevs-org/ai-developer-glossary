@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "generate": "npx tsx generate-docs.ts",
+    "generate": "npx tsx ../scripts/generate-docs.ts",
     "start": "npm run generate && docusaurus start",
     "build": "npm run generate && docusaurus build",
     "swizzle": "docusaurus swizzle",
