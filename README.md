@@ -1,4 +1,4 @@
-# AI Developer Glossary & Slang — Field Guide
+# AI Glossary & Slang — Field Guide
 
 > A curated, community-driven guide to modern AI developer slang, LLM jargon, and engineering terminology. Updated continuously for devs, researchers, and builders working on the frontier. Living glossary. Grouped by where you hear them. Definition + how it gets used.
 
