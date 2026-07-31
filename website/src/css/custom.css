@@ -1,30 +1,257 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Global styles. Infima ships with the classic template; this file maps the
+ * christian devs brand tokens (newsletter repo `src/styles/theme.css`, ADR 0003)
+ * onto Infima's variables so the whole site themes for free.
+ *
+ * Dark is the brand's primary mode; light is the secondary variant.
  */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  /* Brand tokens, mirrored from the newsletter so both sites stay in sync. */
+  --cd-bg: #f4f7fb;
+  --cd-panel: #ffffff;
+  --cd-text: #0f151d;
+  --cd-muted: #55626f;
+  --cd-accent: #0e7fb8;
+  --cd-gold: #b3660f;
+  --cd-hairline: #e0e6ee;
+
+  --cd-font-display: "Space Grotesk", system-ui, sans-serif;
+  --cd-font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --cd-font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Infima primary ramp, built around the light-mode accent. */
+  --ifm-color-primary: var(--cd-accent);
+  --ifm-color-primary-dark: #0d72a6;
+  --ifm-color-primary-darker: #0c6b9c;
+  --ifm-color-primary-darkest: #0a5880;
+  --ifm-color-primary-light: #0f8cca;
+  --ifm-color-primary-lighter: #1093d4;
+  --ifm-color-primary-lightest: #17a4ea;
+
+  --ifm-background-color: var(--cd-bg);
+  --ifm-background-surface-color: var(--cd-panel);
+  --ifm-font-color-base: var(--cd-text);
+  --ifm-heading-color: var(--cd-text);
+  --ifm-toc-border-color: var(--cd-hairline);
+  --ifm-hr-border-color: var(--cd-hairline);
+
+  --ifm-font-family-base: var(--cd-font-body);
+  --ifm-heading-font-family: var(--cd-font-display);
+  --ifm-font-family-monospace: var(--cd-font-mono);
+  --ifm-heading-font-weight: 700;
+  --ifm-code-font-size: 92%;
+
+  --ifm-navbar-background-color: var(--cd-bg);
+  --ifm-navbar-shadow: inset 0 -1px 0 var(--cd-hairline);
+
+  --docusaurus-highlighted-code-line-bg: rgba(14, 127, 184, 0.12);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+[data-theme="dark"] {
+  --cd-bg: #080b12;
+  --cd-panel: #0d121d;
+  --cd-text: #dfe7f2;
+  --cd-muted: #6d7c93;
+  --cd-accent: #38bdf8;
+  --cd-gold: #f5a742;
+  --cd-hairline: #16202f;
+
+  /* Infima primary ramp, built around the dark-mode accent. */
+  --ifm-color-primary: var(--cd-accent);
+  --ifm-color-primary-dark: #17b1f6;
+  --ifm-color-primary-darker: #0aa8f0;
+  --ifm-color-primary-darkest: #088ac6;
+  --ifm-color-primary-light: #59c9fa;
+  --ifm-color-primary-lighter: #6bcffb;
+  --ifm-color-primary-lightest: #9adffc;
+
+  --docusaurus-highlighted-code-line-bg: rgba(56, 189, 248, 0.14);
+}
+
+/* The footer is dark in both modes (`style: "dark"` in the config). Infima
+   scopes its own gray-900 vars on `.footer--dark`, so the brand values have to
+   land on that selector rather than `:root` to win.
+
+   It's also the positioning context for the full-bleed credit band below:
+   `z-index: 0` makes it a stacking context, so the band's negative z-index
+   paints above the footer's own background but beneath the text, and
+   `overflow: hidden` keeps the band's 100vw from adding a scrollbar. */
+.footer--dark {
+  --ifm-footer-background-color: #0f151d;
+  --ifm-footer-color: #dfe7f2;
+  --ifm-footer-link-color: #93a2b8;
+  --ifm-footer-title-color: #ffffff;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  border-top: 1px solid var(--cd-hairline);
+}
+
+[data-theme="dark"] .footer--dark {
+  --ifm-footer-background-color: var(--cd-panel);
+  --ifm-footer-color: var(--cd-text);
+  --ifm-footer-link-color: var(--cd-muted);
+}
+
+.footer__link-item:hover {
+  color: var(--cd-accent);
+}
+
+.footer__title {
+  font-family: var(--cd-font-display);
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  text-transform: lowercase;
+}
+
+/* Epigraph closing out the links band. It rides in the `copyright` field, so
+   it needs its own class and an explicit reset — Infima's blockquote defaults
+   and the .markdown treatment are both wrong here (this one is a statement of
+   purpose, not a usage example, so it takes the display face, not mono). */
+.footer__quote {
+  position: relative;
+  margin: 2.5rem auto 0;
+  max-width: 34rem;
+  padding: 1.75rem 0 1.5rem;
+  border: 0;
+  background: transparent;
+  font-family: var(--cd-font-display);
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #dfe7f2;
+}
+
+/* Its own band, one step lighter than the links band above and two steps off
+   the credit band below — the epigraph is the thing worth looking at down
+   here, so it lifts rather than recedes. Same full-bleed pseudo-element trick
+   as the credit band, for the same reason. */
+.footer__quote::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  background: #131c29;
+  border-top: 1px solid rgba(223, 231, 242, 0.1);
+}
+
+/* The footer is dark in both modes, so the citation takes the dark-mode gold
+   outright — light mode's darker gold is tuned for a pale background and goes
+   muddy on near-black. */
+.footer__quote cite {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--cd-font-mono);
+  font-size: 0.75rem;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  color: #f5a742;
+}
+
+/* Credit line gets its own full-bleed band, a shade below the links band, so
+   the footer reads as two zones instead of one long block. The band is a
+   pseudo-element because the copyright markup sits inside Infima's centered
+   container — the text stays measured, only the color runs edge to edge. */
+.footer__credit {
+  position: relative;
+  display: block;
+  margin-top: 0;
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+  color: #93a2b8;
+}
+
+.footer__credit::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: -1;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
+  background: #080b12;
+  border-top: 1px solid rgba(223, 231, 242, 0.1);
+}
+
+/* Lowercase display wordmark, matching the newsletter masthead. */
+.navbar__title {
+  font-family: var(--cd-font-display);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+}
+
+.navbar__brand:hover .navbar__title {
+  color: var(--cd-accent);
+}
+
+.markdown h1 {
+  letter-spacing: -0.03em;
+}
+
+/* Terms render as h3s — the generator turns each README "##" section into
+   the page's h1 and leaves each term's "###" heading alone, so h2 never
+   actually appears in these docs. A hairline rule separates the long
+   alphabetical run of terms without the shouting that heavier treatment
+   would add. */
+.markdown h3 {
+  letter-spacing: -0.02em;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--cd-hairline);
+}
+
+/* Usage examples are quoted speech, repeated 20+ times a page. Mono is what
+   does the register-shifting work: it reads like a line pasted from a
+   terminal or chat log, closer to what these actually are, and its straight
+   quote glyphs look intentional in a monospace face instead of like a
+   broken smart-quote conversion the way they'd read in Inter — so the
+   content's own literal quotes are left alone rather than papered over. A
+   hung decorative quote mark was tried and cut here: those literal quotes
+   are plainly legible in mono, so a second glyph a few characters to the
+   left just doubled up and read as a stray character, not a flourish. The
+   rule alone carries the block, and it sits on --cd-muted rather than
+   --cd-hairline (too faint against panel/bg to work as a scan-line down a
+   long page) or --cd-accent (fights the cyan "Related terms" links directly
+   underneath). Text stays at full --cd-text weight too, so the block reads
+   as a different voice rather than a disabled one. */
+.markdown blockquote {
+  margin: 0.5rem 0 1.5rem;
+  padding: 0.15rem 0 0.15rem 1.25rem;
+  background: transparent;
+  border-left: 2px solid var(--cd-muted);
+  color: var(--cd-text);
+  font-family: var(--cd-font-mono);
+  font-style: normal;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* The gold token is the brand's "warm signal" slot — used here for search hits
+   and inline highlights so it stays distinct from the cyan accent on links. */
+mark,
+.search-result-match {
+  background: transparent;
+  color: var(--cd-gold);
+  font-weight: 600;
+}
+
+.menu {
+  font-size: 0.92rem;
+}
+
+.table-of-contents {
+  font-size: 0.82rem;
+}
+
+/* Search input (docusaurus-search-local) picks up the panel color. */
+.navbar__search-input {
+  background-color: var(--cd-panel);
+  border: 1px solid var(--cd-hairline);
 }
