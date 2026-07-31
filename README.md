@@ -38,6 +38,14 @@ Three ways to reshape a model. **Fine-tune**: extra training on your data for fo
 
 **Related terms:** [Synthetic data](#synthetic-data), [Open-weight](#open-weight), [GPU-poor / GPU-rich](#gpu-poor--gpu-rich), [Nerfed](#nerfed)
 
+### Gate / gating
+
+A check that fails the run instead of printing a complaint — merge blocked, deploy stopped, pipeline red. Making a rule gating is a social decision more than a technical one, since every gate is something a person has to satisfy at 5pm on a Friday. Score thresholds on model changes are the newest place teams put them, and the first place they get quietly lowered.
+
+> "Make the schema check gating. It's been warning for six weeks and nobody's fixed it."
+
+**Related terms:** [Eval](#eval), [Green](#green), [Benchmaxxing](#benchmaxxing)
+
 ### Harness / scaffolding
 
 Code around the model: tool definitions, retries, memory, context assembly, permissions. Most quality gains come from the harness, not the weights.
@@ -85,6 +93,14 @@ Model emits structured JSON your code executes, then feeds the result back. Mech
 > "The tool call is fine, the schema's just rejecting the date format."
 
 **Related terms:** [MCP](#mcp), [Agentic / agent loop](#agentic--agent-loop), [Guardrails](#guardrails)
+
+### Trap
+
+A confusion someone documented on purpose instead of tidying away — two names close enough that people reach for the wrong one, written down side by side so the next reader trips over the difference rather than the thing itself. Test suites use the word the same way: a case that exists because a plausible-looking fix broke it once. Deleting one because it "reads badly" is how the confusion comes back.
+
+> "Leave both entries. That pair is a trap on purpose — I've seen three PRs merge the wrong one."
+
+**Related terms:** [Foot-gun](#foot-gun), [Load-bearing](#load-bearing), [Gate / gating](#gate--gating)
 
 ---
 
@@ -253,6 +269,14 @@ Which side of the compute divide you're on. The poor adapt small open models on 
 > "We're GPU-poor — we're fine-tuning an 8B, not pretraining anything."
 
 **Related terms:** [Frontier model](#frontier-model), [Open-weight](#open-weight), [Fine-tune / distill / quantize](#fine-tune--distill--quantize)
+
+### Green
+
+Everything passing — tests, lint, CI. Doubles as a status claim in standups, which is exactly why it earns a follow-up question: green because the work is right, or green because something stopped asserting? Nothing is easier for a model to optimize than a signal the team treats as the finish line.
+
+> "We're green." / "We're green because you deleted the flaky test, which is not the same thing."
+
+**Related terms:** [Gate / gating](#gate--gating), [Reward hacking](#reward-hacking), [Ship / shipped](#ship--shipped)
 
 ### Load-bearing
 
@@ -496,11 +520,19 @@ Iterating the wording of a prompt for reliable output — worked examples, role 
 
 ### Reasoning models / System 2
 
-Models that spend tokens thinking before they answer, usually in a hidden scratchpad you pay for but don't see. Worth it for math, multi-step planning, and gnarly debugging; wasteful for "rename this variable."
+Models that spend tokens thinking before they answer, usually in hidden intermediate output you pay for but don't see. Worth it for math, multi-step planning, and gnarly debugging; wasteful for "rename this variable."
 
 > "Send the migration plan to a reasoning model and let it think before it answers."
 
-**Related terms:** [Chain of thought (CoT)](#chain-of-thought-cot), [Test-time compute](#test-time-compute)
+**Related terms:** [Chain of thought (CoT)](#chain-of-thought-cot), [Test-time compute](#test-time-compute), [Scratchpad](#scratchpad)
+
+### Scratchpad
+
+Working area where a model thinks before answering — intermediate tokens the final answer leans on but the user usually never sees. Providers bill for them, hide them, and sometimes hand back a summary instead, so you are paying for text you can't read. Treat what's in there as unverified: it's a rough draft, not a log of what the model actually did.
+
+> "The scratchpad says it checked the schema. It did not check the schema."
+
+**Related terms:** [Chain of thought (CoT)](#chain-of-thought-cot), [Reasoning models / System 2](#reasoning-models--system-2), [Token burn](#token-burn)
 
 ### System prompt
 
@@ -530,9 +562,17 @@ Number of worked examples in the prompt. Zero-shot = instruction only. Few-shot 
 
 ## 🔒 Security & Trust
 
+### Blast radius
+
+How much breaks when this goes wrong — files touched, rows deleted, customers paged. Borrowed from incident review, and now the first question worth asking before handing an autonomous process write access: not "will it screw up" but "what does it reach when it does". A small one beats good intentions every time.
+
+> "It has a token with org-wide write. Blast radius is every repo we own — scope it down before this runs unattended."
+
+**Related terms:** [Guardrails](#guardrails), [Human in the loop (HITL)](#human-in-the-loop-hitl), [Agentic / agent loop](#agentic--agent-loop), [Yeet](#yeet)
+
 ### Guardrails
 
-Runtime constraints on inputs/outputs — filters, schema validation, allowlists, sandboxes, approval gates. Separate layer from training-time safety.
+Runtime constraints on inputs/outputs — filters, schema validation, allowlists, sandboxes, approval checkpoints. Separate layer from training-time safety.
 
 > "The guardrail blocks any tool call that writes outside the workspace."
 
