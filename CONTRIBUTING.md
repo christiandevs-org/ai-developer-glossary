@@ -81,6 +81,18 @@ Some entries exist specifically to flag a confusion. Keep the contrast explicit 
 - **One-shotted** — the "nailed it first try" sense, unrelated to the example-count sense of "shot" in zero-shot / few-shot.
 - **Model collapse vs. mode collapse** — a lineage degrading across training generations vs. one model's output range narrowing. Near-identical names, unrelated failures. Both entries state the contrast, and both are in `TRAP_EXEMPT`.
 
+## Commit messages
+
+All commits must follow [Conventional Commits](https://www.conventionalcommits.org/): `type(scope): subject`.
+
+```
+feat: add "context rot" term
+fix(lint): correct anchor slug check for slash headings
+chore(ci): bump actions/checkout to v7
+```
+
+Common types: `feat`, `fix`, `docs`, `chore`, `ci`, `refactor`, `test`. Scope is optional. PRs are checked by [commitlint](commitlint.config.cjs) in CI — every commit on the branch must pass, not just the PR title.
+
 ## Linting
 
 ```
