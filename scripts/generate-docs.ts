@@ -74,7 +74,7 @@ const parseReadme = (markdown: string): Section[] => {
 const rewriteRelatedTermLinks = (
   content: string,
   currentSlug: string,
-  sectionTermMap: Map<string, string>
+  sectionTermMap: Map<string, string>,
 ): string => {
   // Match markdown links like [Term name](#anchor)
   return content.replace(
@@ -89,7 +89,7 @@ const rewriteRelatedTermLinks = (
 
       // Cross-section — rewrite to relative path
       return `[${linkText}](${owningSlug}.md#${anchor})`;
-    }
+    },
   );
 };
 
@@ -126,19 +126,17 @@ const generateDocs = () => {
   const indexContent = [
     "---",
     "sidebar_position: 0",
-    'title: "AI Developer Glossary"',
+    'title: "Sections"',
     "slug: /",
     "---",
     "",
-    "# AI Developer Glossary & Slang — Field Guide",
+    "# AI Glossary & Slang — Field Guide",
     "",
     "> A curated, community-driven guide to modern AI developer slang, LLM jargon, and engineering terminology. Updated continuously for devs, researchers, and builders working on the frontier.",
     "",
     "Use the **search bar** above to find any term, or browse by section:",
     "",
-    ...sections.map(
-      (s) => `- [${s.emoji} ${s.title}](${s.slug}.md)`
-    ),
+    ...sections.map((s) => `- [${s.emoji} ${s.title}](${s.slug}.md)`),
     "",
   ].join("\n");
 
@@ -146,11 +144,7 @@ const generateDocs = () => {
   console.log("  ✓ index.md (landing page)");
 
   for (const [index, section] of sections.entries()) {
-    const rewrittenContent = rewriteRelatedTermLinks(
-      section.content,
-      section.slug,
-      termMap
-    );
+    const rewrittenContent = rewriteRelatedTermLinks(section.content, section.slug, termMap);
 
     const frontmatter = [
       "---",
