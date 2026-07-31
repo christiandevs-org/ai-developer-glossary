@@ -11,8 +11,8 @@ const config: Config = {
     v4: true,
   },
 
-  url: "https://christiandevs-org.github.io",
-  baseUrl: "/ai-glossary/",
+  url: "https://glossary.christiandevs.org",
+  baseUrl: "/",
 
   organizationName: "christiandevs-org",
   projectName: "ai-glossary",
