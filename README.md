@@ -254,6 +254,14 @@ Which side of the compute divide you're on. The poor adapt small open models on 
 
 **Related terms:** [Frontier model](#frontier-model), [Open-weight](#open-weight), [Fine-tune / distill / quantize](#fine-tune--distill--quantize)
 
+### Load-bearing
+
+Structural-engineering loanword for the line nothing else survives losing — a comment, a `sleep(200)`, one stray sentence in an instruction block. You find out which line it was by deleting it and watching everything fall over. Said with equal parts affection and dread, since load-bearing things are almost never labelled as such.
+
+> "Turns out 'be concise' was load-bearing — dropped it and the eval fell 14 points."
+
+**Related terms:** [Foot-gun](#foot-gun), [System prompt](#system-prompt), [Context engineering](#context-engineering)
+
 ### Rug pull
 
 Provider yanks something you depended on — model deprecated, pricing 5x'd, free tier killed, license flipped. Crypto loanword.
